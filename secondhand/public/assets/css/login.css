@@ -1,0 +1,202 @@
+
+.loginContainer {
+    background-image: linear-gradient(to right bottom, rgb(190, 229, 241), rgb(172 243 208));
+    width: 100%;
+    max-width: 80%;
+    height: 50%;
+    text-align: center;
+    padding: 0px 100px 23px;
+    border-radius: 30px;
+    transform: translate(14%,-10%);
+    margin-top: 8rem;
+    z-index: 1 !important;
+}
+.loginContainer::before {
+   position: absolute;
+    bottom: 50%;
+    left: 80%;
+    width: 600px;
+    height: 600px;
+    content: '';
+    background-image: linear-gradient(to top right, #b1f5ed, #C2ADF3);
+    border-radius: 50%;
+    /* z-index: -22; */
+    filter: blur(10px);
+    animation: backgroundanimation 5s ease-in-out infinite alternate;
+}
+
+
+.loginContainer::after{
+       position: absolute;
+        top: 34%;
+        right: 90%;
+        width:500px;
+        height: 450px;
+        content: '';
+        background-image: linear-gradient(to top right, #C2ADF3, #b1f5ed);
+        border-radius: 50%;
+        z-index: -11;
+        filter: blur(5px);
+        animation: backgroundanimation 5s ease-in-out infinite alternate;
+    
+}
+@keyframes backgroundanimation{
+    from{
+        transform: translate(0,0);
+    }to{
+            transform: translate(0,100px);
+        }
+}
+.form{
+    background-color: #F5F5F5;
+    padding:5px 20px 20px 20px;
+    margin-top:50px;
+    border-radius: 20px;
+    position: relative;
+}
+.form::before{
+   content: '';
+   position: absolute;
+   width:90%;
+   height:100%;
+   background-color: #ffffff66;
+   left:5%;
+   top:-10px;
+   border-radius: 20px;
+   z-index: -1;
+   transition: 0.5s;
+}
+.loginContainer .logo img{
+    width:20%;
+}
+.group{
+    position: relative;
+    display: grid;
+    grid-template-columns: 30px 40rem auto;
+    padding:10px 0;
+    margin-top: 50px;
+    border-bottom: 1px solid #555;
+}
+
+
+a{
+    text-decoration: none;
+    margin-left: -10px;
+}
+.group:nth-child(2) a{
+    text-decoration: none;
+    margin-top: -40px;
+    margin-bottom: -10px;
+    
+}
+.group:nth-child(3) a{
+    text-decoration: none;
+    margin-top: -40px;
+    margin-bottom: -10px;
+    
+}
+.group input{
+    background-color: transparent;
+    border:none;
+    outline: none;
+}
+.group label{
+    position: absolute;
+    left:35px;
+    top:10px;
+    transition: 0.5s;
+}
+
+.group input:focus ~ label,
+.group input:not(:placeholder-shown) ~ label
+{
+    top:-20px;
+}
+.group:nth-child(2) input[type="text"] ~ .fa-eye-slash{
+    display: none;
+}
+.group:nth-child(2) input[type="password"] ~ .fa-eye{
+    display: none;
+}
+.group:nth-child(3) input[type="text"] ~ .fa-eye-slash{
+    display: none;
+}
+.group:nth-child(3) input[type="password"] ~ .fa-eye{
+    display: none;
+}
+
+.loginBtn{
+    background-color: #F5F5F5;
+    width:100px;
+    height:100px;
+    border-radius: 50%;
+    margin-left: 50%;
+    transform: translate(-50%,50%);
+  /* Set the element's background to the gradient */
+background: linear-gradient(to right bottom, rgb(190, 229, 241), rgb(172, 243, 208));
+
+/* Create a box shadow with the same gradient */
+box-shadow: 0 0 0 10px rgb(190, 229, 241), 0 0 0 20px rgb(172, 243, 208);
+
+    position: relative;
+    z-index: 1;
+}
+.loginBtn button {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: none;
+    background-image: linear-gradient(to right bottom, rgb(149 245 153), rgb(101 205 244));
+    color: rgb(255, 255, 255);
+    margin-top: 0vw;
+}
+.loginBtn::before{
+    content: '';
+    position: absolute;
+    left:calc(100% + 10px);
+    top:50%;
+    width:70px;
+    height: 20px;
+    border-bottom-left-radius: 15px;
+    box-shadow: -30px 0px 0 rgb(212 237 235);
+    z-index: -1;
+}
+.loginBtn::after{
+    content: '';
+    position: absolute;
+    right:calc(100% + 10px);
+    top:50%;
+    width:70px;
+    height: 20px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 30px 0px 0 rgb(212 237 235);
+    z-index: -1;
+}
+@media  (max-width: 992px){
+    .loginContainer {
+        background-image: linear-gradient(to right bottom, rgb(190, 229, 241), rgb(172 243 208));
+        width: 100%;
+        max-width: 80%;
+        height: 50%;
+        text-align: center;
+        padding: 10px 10px 53px;
+        border-radius: 30px;
+        transform: translate(14%,-10%);
+        margin-bottom: 2rem;
+        z-index: 1 !important;
+    }
+    .loginContainer::before {
+        display: none;
+    }
+    .loginContainer::after {
+        display: none;
+    }
+    .group{
+        position: relative;
+        display: grid;
+        grid-template-columns: 30px 51vw auto;
+        padding:10px 0;
+        margin-top: 50px;
+        border-bottom: 1px solid #555;
+    }
+}
