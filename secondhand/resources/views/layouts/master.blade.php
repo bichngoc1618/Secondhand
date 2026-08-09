@@ -11,80 +11,46 @@
             <span class="hamburger-btn material-symbols-rounded">menu</span>
             <ul class="links">
               <span class="close-btn material-symbols-rounded">close</span>
-             
-              
               <li><a href="{{route('User.home')}}">Home</a></li>
               <li><a href="{{route('User.product')}}">Product</a></li>
               <li><a href="{{route('User.contact')}}">Contact</a></li>
-             
-              @if(auth()->check())
-                  
-              <li class="dropdown">
-             
-                <img style="width: 30px; height: 30px; border-radius: 50%" src="{{asset('assets')}}/images/{{Auth::user()->avatar}}" class="img-circle" width="15%">
-                <a href="#" class="dropdown-link">{{Auth::user()->name}}</a>
-                <ul class="dropdown-menu">
-                  
-                    <li><a href="{{route('Admin.information')}}">Management</a></li>
-                  
-                    <!-- Thêm các mục menu khác nếu cần -->
-                </ul>
-            </li>
-            @endif
-              
-            <li>
-             
+            </ul>
+            
+            <div class="nav-right" style="display: flex; align-items: center; gap: 1.5rem;">
               <div class="searchBox">
-                <form action="{{ route('search') }}" method="POST" autocomplete="off">
+                <form action="{{ route('search') }}" method="POST" autocomplete="off" style="margin: 0;">
                   {{ csrf_field() }}
                   <input class="searchInput" type="text" name="query" id="searchInput" placeholder="Search">
-                 
                   <button class="searchButton" type="submit">
                       <i class="fa fa-search"></i>
                   </button>
                   <div id="search_ajax"></div>
               </form>
-
             </div>
             
-         
-              
-            </li>
-            
-             
-             
-            </ul>
-            
-           
-          
-          
             <div class="cart">
-              
-              
               <span id="cart-quantity">{{\App\Http\Controllers\User\CartControllerUs::countCart()}}</span>
-             
               <a href="{{route('cart.index')}}" >
-                  <i class="fas fa-shopping-cart"></i>
+                  <i class="fas fa-shopping-cart fa-lg"></i>
               </a>
-             
-          </div>
+            </div>
         
-   
-          @if(auth()->check())
-          <form class="login-btn"  action="{{ route('logout') }}" method="GET">
-            @csrf
-            <button style="    background: none;
-            padding:0;
-            margin: 0; border: none; font-size: 0.8rem" type="submit" >Logout</button>
-        </form>
-      @else
-          <a class="login-btn" href="{{ route('login')}}">
-              <button style="    background: none;
-              padding: 0;
-              margin: 0; border: none; font-weight: bold" type="submit">Login</button>
-          </a>
-      @endif
-          
+            @if(auth()->check())
+            <div style="display: flex; align-items: center; gap: 0.3rem; background: #e0f2f1; padding: 2px 10px 2px 4px; border-radius: 50px;">
+               <img style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 2px solid white;" src="{{asset('assets')}}/images/{{Auth::user()->avatar}}" alt="avatar">
+               <a href="{{route('Admin.information')}}" style="text-decoration: none; color: #0d5f41; font-weight: 700; font-size: 0.85rem; margin-right: 0.2rem; white-space: nowrap;">
+                  {{Auth::user()->name}}
+               </a>
+            </div>
+            <form class="login-btn" action="{{ route('logout') }}" method="GET" style="margin: 0;">
+              @csrf
+              <button style="background: #04AA6D; padding: 5px 12px; border-radius: 20px; border: none; font-size: 0.8rem; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; white-space: nowrap;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'" type="submit" >Logout</button>
+            </form>
+            @else
+            <a class="login-btn" href="{{ route('login')}}" style="text-decoration: none;">
+                <button style="background: #04AA6D; padding: 5px 12px; border-radius: 20px; border: none; font-weight: bold; color: white; font-size: 0.8rem; cursor: pointer; transition: 0.3s; white-space: nowrap;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'" type="submit">Login</button>
+            </a>
+            @endif
           </div>
          
       </header>

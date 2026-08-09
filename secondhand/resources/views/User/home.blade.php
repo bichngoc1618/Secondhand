@@ -27,11 +27,7 @@
 <body>
 
     
-      
-      
-        
-     
-            <div class="slider">
+    <div class="slider">
             <!-- list Items -->
             <div class="list">
                 <div class="item active">
@@ -88,39 +84,29 @@
           <div class="thumbnail">
               <div class="item active">
                   <img src="{{asset('assets')}}/images/home2.jpg">
-                  
               </div>
               <div class="item">
                 <img src="{{asset('assets')}}/images/home3.jpg">
-                  
               </div>
               <div class="item">
                   <img src="{{asset('assets')}}/images/home9.jpg">
-                 
               </div>
               <div class="item">
                   <img src="{{asset('assets')}}/images/home8.jpg">
-                  
               </div>
               <div class="item">
                   <img src="{{asset('assets')}}/images/home4.jpg">
-                 
               </div>
           </div>
       </div>
   
-       
-
-
-     
-
         
 <div class="container" id="see">
-    <h2 class="unit" data-aos="fade-up" data-aos-dmelay="200">Cooperation unit</h2>
+    <h2 class="unit" data-aos="fade-up" data-aos-delay="200">Cooperation unit</h2>
     <div class="row unit_ct">
       @foreach ($cooperation as $item)
       @if ($item->visible=='visible')
-      <div data-aos="fade-up" data-aos-delay="400" class="col-3" ct1>
+      <div class="col-3" data-aos="fade-up" data-aos-delay="400" ct1>
         <img src="{{asset('assets')}}/images/{{$item->logo}}" width="60%">
         <p>{{$item->name}}</p>
       </div>
@@ -128,11 +114,13 @@
      
       @endforeach
     </div>
+    
+    <hr class="section-divider" data-aos="fade-up">
 
-   
+    <h2 class="pr_cate" data-aos="fade-up">Product Categories</h2>
     <div class="categories">
      @foreach ($categories as $item)
-     <div class="card" data-aos="fade-up" data-aos-delay="200s">
+     <div class="card" data-aos="fade-up" data-aos-delay="200">
       @if ($item->images)
       <img src="{{ asset('assets/images/' . $item->images) }}" alt="Image">
 
@@ -150,7 +138,6 @@
    
   
     </div>
-    <h2 class="pr_cate">Product Categories</h2>
 </div>
  
 
@@ -172,13 +159,12 @@
   </div>
  
 </div>
-</div>
 
-<div class="cotainer">
-   <h2 class="popular" data-aos="fade-up" data-aos-delay="200s">
+<div class="container mt-5">
+   <h2 class="popular" data-aos="fade-up" data-aos-delay="200">
     Popular product
   </h2>
-  <div data-aos="fade-up" data-aos-delay="200s" class="product"  id="filterable-cards">
+  <div class="product" data-aos="fade-up" data-aos-delay="200" id="filterable-cards">
    
     @foreach ($product as $item)
     @if ($item->status=='Popular')
@@ -223,12 +209,9 @@
 
         
        
-          <form  style="    height: 0.5rem;
-          padding: 0;
-          margin-top: -0.4rem;"  class="add" action="{{ route('cart.store') }}" method="POST">
+          <form class="add" action="{{ route('cart.store') }}" method="POST">
             @csrf
-       
-          <button style="font-size: 1vw" type="submit" class="addcard"> <i class="fas fa-shopping-cart"></i> Add to cart</button></i>
+          <button type="submit" class="addcard"> <i class="fas fa-shopping-cart"></i> Add to cart</button>
           <input type="hidden" name="quantity" value="1">
           <input type="hidden" name="id" value="{{$item->id}}">
           </form>
@@ -291,6 +274,63 @@
 
 
 <script src="js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true,
+  });
+
+  // Banner Slider Script
+  let items = document.querySelectorAll('.slider .list .item');
+  let next = document.getElementById('next');
+  let prev = document.getElementById('prev');
+  let thumbnails = document.querySelectorAll('.thumbnail .item');
+
+  let countItem = items.length;
+  let itemActive = 0;
+
+  if (countItem > 0 && next && prev) {
+      next.onclick = function(){
+          itemActive = itemActive + 1;
+          if(itemActive >= countItem){
+              itemActive = 0;
+          }
+          showSlider();
+      }
+      prev.onclick = function(){
+          itemActive = itemActive - 1;
+          if(itemActive < 0){
+              itemActive = countItem - 1;
+          }
+          showSlider();
+      }
+      let refreshInterval = setInterval(() => {
+          next.click();
+      }, 5000);
+      
+      function showSlider(){
+          let itemActiveOld = document.querySelector('.slider .list .item.active');
+          let thumbnailActiveOld = document.querySelector('.thumbnail .item.active');
+          if (itemActiveOld) itemActiveOld.classList.remove('active');
+          if (thumbnailActiveOld) thumbnailActiveOld.classList.remove('active');
+
+          items[itemActive].classList.add('active');
+          thumbnails[itemActive].classList.add('active');
+
+          clearInterval(refreshInterval);
+          refreshInterval = setInterval(() => {
+              next.click();
+          }, 5000);
+      }
+      thumbnails.forEach((thumbnail, index) => {
+          thumbnail.addEventListener('click', () => {
+              itemActive = index;
+              showSlider();
+          })
+      });
+  }
+</script>
 <script>
   const myCarousel = document.getElementById('myCarousel')
   myCarousel.addEventListener('slid.bs.carousel', function () {

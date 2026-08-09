@@ -1,221 +1,93 @@
 #hero-carousel{
-  top: -3.5vw;
+  /* Removed negative top margin */
+}
+.c-item {
+  height: 180px; /* Reduced height so products are more visible */
+}
 
- 
- }
- .c-item {
-   height: 440px;
- }
- 
- .c-img {
-   height: 100%;
-   object-fit: cover;
-   filter: brightness(0.7);
- }
- .categories{
-    
- 
+.c-img {
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+  /* Modern Filter Pills */
+  .filter-pill {
+    background-color: transparent;
+    border: 1px solid #04AA6D;
+    color: #04AA6D;
+    font-weight: 600;
+    border-radius: 50rem;
+    padding: 4px 16px; /* Shrink padding */
+    font-size: 0.85rem; /* Shrink font */
+    transition: all 0.3s ease;
+  }
   
-     height: 100vh;
-     width: 16%;
-     max-width: 100%;
-     max-height: 100%;
-     overflow: hidden;
-     transition: width 0.3s linear;
-    background: transparent;
-    border-radius: 2%;
-   
-   
-   }
-   .categories li{
-     list-style: none;
-   }
-   .cate{
-     transition: all 0.5s ease;
-     display: flex;
-     margin-left: -29px;
-     text-align: center;
-   }
-   .cate img{
-     width: 4vw;
-     height: 4vw;
-     border: 3px solid rgb(33, 230, 138);
-     background-color: #b5e6e6;
-     border-radius: 50%;
-     margin-bottom: 10px;
-     margin-left: 1vw;
-   
-   }
-   .cate span{
-     font-weight: bolder;
-     font-size: 22px;
-     color: #0e2e2e;
-     text-transform: uppercase;
-    
-   }
-   .categories a{
-     position: relative;
-     font-size: 1.3vw;
-     color: rgb(33, 230, 138);
-     display: table;
-     width: 30vw;
-     padding: 1vw;
-     text-decoration: none;
-     margin-left: -3.5vw;
-    
-   }
-   .categories i{
-     position: relative;
-     width: 7vw;
-     height: 5vw;
-     top: 14px;
-     font-size: 1.6vw;
-     text-align: center;
-     margin-left: 2vw;
-     margin-right: 1vw;
-   }
-   .categories span{
-     position: relative;
-     top:12px;
-     margin-left: 2vw;
-     font-weight: bold;
-     
-   }
-   .categories a:hover{
-     background: #fff;
-   }
-   .categories:hover{
-     width: 63%;
-   }
-   .cotainer{
-     width: 260%;
-   }
-   @media (max-width:747px){
-     .categories{
-     
-       width: 50%;
-      
-    
-     }
-    
-     .cate img{
-       width: 9.5vw !important;
-       height: 9.5vw !important;
-       margin-left: 1px !important;
-     
-     
-     }
-     .cate span{
-     
-       font-size: 1.7vw;
-       
-      
-     }
-     .categories a{
-   
-       font-size: 1.4vw;
-       display: table;
-     
-       padding: 8vw;
-       padding-left: 0;
- 
-    
-      
-      
-     }
-     .categories i{
-       position: relative;
-   
-       top: 14px;
-       font-size: 5vw;
-       text-align: center;
-      
-     
-     }
-     .categories:hover{
-       width: 100%;
-     }
-   }
-   @media (max-width:820px){
-     .categories{
-     
-       width: 28%;
-      
-    
-     }
-     .categories:hover{
-       width: 100%;
-     }
-     .cate img{
-       margin-left: 13px;
-       width: 6.5vw;
-       height: 6.5vw;
-     
-     
-     }
- 
-    
-   }
-    
-   
-   .filter{
-     text-align: center;
-     align-items: center;
-   }
-   
-   .filter ul {
-     list-style-type: none;
-     margin: 0;
-     padding: 0;
-     overflow: hidden;
-     background-color: #333;
-   }
-   
- 
-   
-   .filter li a {
-     display: block;
-     color: white;
-     text-align: center;
-     padding: 14px 16px;
-     text-decoration: none;
-    
-   }
-   
-   .filter li a:hover {
-     background-color: #111;
-   }
-   
- 
-   /*filer product*/
-   
- #filter-buttons button {
-   border-radius: 3px;
-   background: #fff;
-   border-color: transparent;
- 
- }
- 
- #filter-buttons button:hover {
-   background: #ddd;
- }
- 
- #filter-buttons button.active {
-   color: #fff;
-   background: rgb(62, 129, 83);
- }
- 
- 
- 
- #filterable-cards .card.hide {
-   display: none;
- }
+  .filter-pill:hover {
+    background-color: rgba(4, 170, 109, 0.1);
+    color: #04AA6D;
+  }
+  
+  .filter-pill.active {
+    background-color: #04AA6D;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(4, 170, 109, 0.3);
+  }
+  
+  #filterable-cards .card.hide {
+    display: none;
+  }
+  
+  /* Sidebar styles */
+  .sidebar-title {
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .list-group-item {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .list-group-item:hover {
+    background-color: #f8fcfb;
+    transform: translateX(5px);
+  }
  header{
-   height:20vh !important;
+   height:15vh !important;
    overflow: hidden;
-  
  }
  
+ /* Force 4 products per row to prevent layout breaking */
+ #filterable-cards {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   gap: 40px;
+   justify-content: center;
+ }
  
-   
+ #filterable-cards .card {
+   width: 100% !important;
+   margin: 0 !important;
+   height: auto !important;
+   min-height: 18rem !important; /* Shorter card for product page */
+ }
  
+ #filterable-cards .card .img {
+   height: 10rem !important;
+ }
+ 
+ /* Responsive adjustments */
+ @media (max-width: 1200px) {
+   #filterable-cards {
+     grid-template-columns: repeat(3, 1fr);
+   }
+ }
+ @media (max-width: 992px) {
+   #filterable-cards {
+     grid-template-columns: repeat(3, 1fr);
+   }
+ }
+ @media (max-width: 768px) {
+   #filterable-cards {
+     grid-template-columns: repeat(2, 1fr);
+   }
+ }

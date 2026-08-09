@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('route_id');
             $table->foreign('route_id')->references('id')->on('routes');
             $table->integer('status');
-           $table->primary(['role_id,route_id']);
+           $table->primary(['role_id', 'route_id']);
         });
         
     }

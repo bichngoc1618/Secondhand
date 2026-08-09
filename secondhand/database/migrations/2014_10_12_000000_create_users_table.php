@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('address', 500)->nullable();
             $table->string('phone', 20)->nullable();
             $table->string('city', 100)->nullable();
+            $table->unsignedBigInteger('role_id')->default(2);
+            $table->string('avatar', 500)->default('avatar.png');
         });
     }
 

@@ -73,42 +73,45 @@
 
 
 
-      <div class="conatainer d-flex">
-        <div class="categories flex-fill">
-          <ul>
-           <li>
-             <div href="#" class="cate">
-               <img src="{{asset('assets')}}/images/entend.png">
-               <span>CATEGORIES</span>
-             </div>
-             </li>
-             @foreach ($categories as $item)
-             <li>
-                 <a href="{{ route('product', ['categoryId' => $item->id]) }}">
-                     <i>
-                         <img width="8%" src="{{ asset('assets/images/' . $item->images) }}">
-                     </i>
-                     <span>{{ $item->name }}</span>
-                 </a>
-             </li>
-         @endforeach
+      <div class="container-fluid px-4 my-5">
+        <div class="row">
+          <!-- Sidebar -->
+          <div class="col-lg-2 col-md-4 mb-4">
+            <div class="sidebar-categories sticky-top" style="top: 100px; z-index: 1;">
+              <h4 class="sidebar-title mb-4 fw-bolder text-dark"><i class="fas fa-list-ul text-success me-2"></i> Categories</h4>
+              <div class="list-group shadow-sm rounded-3 border-0">
+                @php
+                  // Assigning dynamic FontAwesome icons based on category name
+                  $icons = [
+                      'Recycled Plastics' => 'fas fa-recycle',
+                      'Eco Friendly Paper' => 'fas fa-leaf',
+                      'Organic Fabric' => 'fas fa-tshirt',
+                      'Green Electronics' => 'fas fa-plug',
+                  ];
+                @endphp
+                @foreach ($categories as $index => $item)
+                @php
+                    $iconClass = $icons[$item->name] ?? 'fas fa-seedling';
+                @endphp
+                <a href="{{ route('product', ['categoryId' => $item->id]) }}" class="list-group-item list-group-item-action d-flex align-items-center py-3 border-bottom px-2">
+                    <i class="{{ $iconClass }} text-success fa-lg me-2" style="width: 20px; text-align: center;"></i>
+                    <span class="fw-bold text-dark" style="font-size: 0.9rem;">{{ $item->name }}</span>
+                </a>
+                @endforeach
+              </div>
+            </div>
+          </div>
          
-     
-          </ul>
-         </div>
-         
-         <div  class="cotainer flex-fill">
-         <!-- products Filter Buttons Section -->
-      <div class="row mt-5 filter" id="filter-buttons">
-        <div style="z-index: 2" class="col-12">
-          <button class="btn mb-2 me-1 active" data-filter="all">Show all</button>
-          <button class="btn mb-2 mx-1" data-filter="Hot Sale">Hot Sale</button>
-          <button class="btn mb-2 mx-1" data-filter="Popular">Popular</button>
-          <button class="btn mb-2 mx-1" data-filter="Hot">Hot</button>
-          <button class="btn mb-2 mx-1" data-filter="Featured">Featured</button>
-        
-        </div>
-      </div>
+          <!-- Product List -->
+          <div class="col-lg-10 col-md-8">
+          <!-- Filter Buttons -->
+          <div class="d-flex justify-content-center flex-wrap mb-4" id="filter-buttons">
+            <button class="btn filter-pill me-2 mb-2 active" data-filter="all">Show All</button>
+            <button class="btn filter-pill mx-2 mb-2" data-filter="Hot Sale">Hot Sale</button>
+            <button class="btn filter-pill mx-2 mb-2" data-filter="Popular">Popular</button>
+            <button class="btn filter-pill mx-2 mb-2" data-filter="Hot">Hot</button>
+            <button class="btn filter-pill ms-2 mb-2" data-filter="Featured">Featured</button>
+          </div>
       <div  class="product"  id="filterable-cards" >
         @foreach ($product as $item)
   
@@ -119,7 +122,9 @@
        <div class="img">
          <div class="d-flex">
            <div class="status flex-fill">{{$item->status}}</div>
+           @if ($item->sale>0)
            <div class="sale flex-fill">{{$item->sale}}%</div>
+           @endif
          </div>
          @if ($item->thumbnail)
          <img src="{{ asset('assets/images/' . $item->thumbnail) }}" alt="Image">
@@ -150,12 +155,9 @@
           <div>{{$item->price}}$</div>
       @endif
       
-      <form  style="    height: 0.5rem;
-      padding: 0;
-      margin-top: -0.35rem;"  class="add" action="{{ route('cart.store') }}" method="POST">
+      <form class="add" action="{{ route('cart.store') }}" method="POST">
         @csrf
-   
-      <button style="font-size: 1vw" type="submit" class="addcard"> <i class="fas fa-shopping-cart"></i> Add to cart</button></i>
+      <button type="submit" class="addcard"> <i class="fas fa-shopping-cart"></i> Add to cart</button>
       <input type="hidden" name="quantity" value="1">
       <input type="hidden" name="id" value="{{$item->id}}">
       </form>
@@ -167,9 +169,10 @@
    
        @endforeach
         
-      </div>
-    </div>
-      </div>
+      </div> <!-- End Product Grid -->
+      </div> <!-- End col-lg-9 -->
+      </div> <!-- End row -->
+      </div> <!-- End container -->
 
 
 
